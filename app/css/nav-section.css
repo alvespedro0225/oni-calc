@@ -1,3 +1,7 @@
+.nav-item {
+  text-transform: capitalize;
+}
+
 .nav-section {
   display: flex;
   justify-content: space-between;

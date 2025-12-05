@@ -1,4 +1,4 @@
-import type { Orientation } from "~/common/enums/orientation";
+import type { Orientation } from "~/common/enums";
 import "../css/nav-section.css";
 import { NavLink } from "react-router";
 
