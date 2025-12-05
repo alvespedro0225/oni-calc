@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [reactRouter(), tsconfigPaths()],
+  plugins: [!process.env.VITEST && reactRouter(), tsconfigPaths()],
   test: {
     globals: true,
     environment: "jsdom",

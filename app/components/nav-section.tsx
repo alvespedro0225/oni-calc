@@ -5,11 +5,9 @@ import { NavLink } from "react-router";
 export default function NavSection({
   options,
   orientation,
-  callback,
 }: {
   options: string[];
   orientation: Orientation;
-  callback: (arg0: string) => void;
 }) {
   const classes = ["nav-section", orientation];
 
