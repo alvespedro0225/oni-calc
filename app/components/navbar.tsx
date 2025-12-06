@@ -1,6 +1,5 @@
 import type { Orientation } from "~/common/enums";
 import NavSection from "./nav-section";
-import { redirect } from "react-router";
 
 export default function Navbar({
   options,

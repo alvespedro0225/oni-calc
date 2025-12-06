@@ -1,6 +1,7 @@
 body {
   max-width: 1200px;
   margin: 15px auto;
+  --background: white;
 }
 
 ul {
@@ -14,4 +15,19 @@ a {
 
 a:visited {
   color: black;
+}
+
+button {
+  border: none;
+  background-color: var(--background);
+}
+
+.normal-hover {
+  cursor: default;
+}
+
+.prevent-select {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

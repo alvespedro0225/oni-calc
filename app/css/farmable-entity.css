@@ -1,0 +1,25 @@
+.farmable {
+  display: grid;
+  grid-template: 1fr 2fr / 1fr 3fr;
+  justify-content: center;
+  align-items: center;
+  max-width: 250px;
+  max-height: 100px;
+  text-align: center;
+}
+
+.farmable-image {
+  grid-row: span 2;
+  max-width: 60px;
+}
+
+.counter-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+}
+
+.counter {
+  min-width: 25px;
+}

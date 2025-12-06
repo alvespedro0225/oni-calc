@@ -1,0 +1,21 @@
+.dialog {
+  height: 100px;
+  top: 40px;
+  padding: 0;
+}
+
+.production-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.production-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
