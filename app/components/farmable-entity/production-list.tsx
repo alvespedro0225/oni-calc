@@ -2,7 +2,7 @@ import type { Ref } from "react";
 import type { Production } from "~/common/models/production";
 import "~/css/production-list.css";
 import "~/css/farmable-entity.css";
-import ButtonIcon from "./button-icon";
+import ButtonIcon from "../button-icon";
 import { DecreaseButton, IncreaseButton } from "~/common/constants";
 
 export default function ProductionList({

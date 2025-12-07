@@ -1,11 +1,11 @@
 import "~/css/farmable-entity.css";
 import { useRef, useState } from "react";
 import type { Farmable } from "~/common/models/farmable";
-import ButtonIcon from "./button-icon";
+import ButtonIcon from "../button-icon";
 import { DecreaseButton, IncreaseButton } from "~/common/constants";
 import ProductionList from "./production-list";
 
-export default function FarmableItem({ item }: { item: Farmable }) {
+export default function FarmableEntity({ entity }: { entity: Farmable }) {
   function increaseEntityCounter() {
     setEntityCounter((c) => c + 1);
   }
@@ -41,7 +41,7 @@ export default function FarmableItem({ item }: { item: Farmable }) {
     dialogRef.current?.show();
   }
 
-  const isMultiProducer = item.production.length > 1;
+  const isMultiProducer = entity.production.length > 1;
 
   const [entityCounter, setEntityCounter] = useState(0);
   const [productionCounter, setProductionCounter] = useState(
@@ -54,22 +54,24 @@ export default function FarmableItem({ item }: { item: Farmable }) {
 
   return (
     <div className="farmable">
-      <img alt="" src={`/${item.imagePath}`} className="farmable-image" />
-      {item.name}
+      <img alt="" src={`/${entity.imagePath}`} className="farmable-image" />
+      {entity.name}
       <div className="counter-wrapper">
         <ButtonIcon
           callback={decreaseCallback}
           alt={DecreaseButton.alt}
           src={DecreaseButton.src}
         />
-        <span className="normal-hover counter">{entityCounter}</span>
+        <span className="normal-hover counter" aria-label="counter value">
+          {entityCounter}
+        </span>
         <ButtonIcon
           callback={increaseCallback}
           alt={IncreaseButton.alt}
           src={IncreaseButton.src}
         />
         <ProductionList
-          productions={item.production}
+          productions={entity.production}
           ref={dialogRef}
           increaseCallback={increaseProductionCounter}
           decreaseCallback={decreaseProductionCounter}

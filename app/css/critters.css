@@ -1,0 +1,6 @@
+.critter-list {
+  display: grid;
+  gap: 15px;
+  justify-content: space-around;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}

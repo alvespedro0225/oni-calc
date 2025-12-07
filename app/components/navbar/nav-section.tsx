@@ -1,5 +1,5 @@
 import type { Orientation } from "~/common/enums";
-import "../css/nav-section.css";
+import "~/css/nav-section.css";
 import { NavLink } from "react-router";
 
 export default function NavSection({

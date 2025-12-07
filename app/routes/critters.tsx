@@ -1,13 +1,20 @@
+import "~/css/critters.css";
 import { useOutletContext } from "react-router";
 import type { Critter } from "~/common/models/critter";
-import FarmableItem from "~/components/farmable-entity";
+import FarmableEntity from "~/components/farmable-entity/farmable-entity";
 
 export default function Critters() {
   const critters = useOutletContext<Critter[]>();
   if (critters.length === 0) {
     return <span>No critters!</span>;
   }
-  return critters.map((critter) => (
-    <FarmableItem item={critter} key={critter.id} />
-  ));
+  return (
+    <ul className="critter-list">
+      {critters.map((critter) => (
+        <li key={critter.id}>
+          <FarmableEntity entity={critter} />
+        </li>
+      ))}
+    </ul>
+  );
 }

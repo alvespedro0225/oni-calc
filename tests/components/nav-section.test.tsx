@@ -4,7 +4,7 @@ import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { Orientation } from "~/common/enums";
 import { getRange as range } from "~/common/functions";
-import NavSection from "~/components/nav-section";
+import NavSection from "~/components/navbar/nav-section";
 
 const items = ["apple", "orange", "banana"];
 const orientation = Orientation.HORIZONTAL;

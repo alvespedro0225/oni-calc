@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 import { Orientation } from "~/common/enums";
-import Navbar from "~/components/navbar";
+import Navbar from "~/components/navbar/navbar";
 
 const travelLinks = ["home", "gifs", "images"];
 const settingsLinks = ["help", "about", "settings"];
