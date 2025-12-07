@@ -20,7 +20,12 @@ export default function ProductionList({
 }) {
   const sameOutput = all(productions, (p) => p === productions[0]);
   return (
-    <dialog className="dialog" ref={ref} closedby="any">
+    <dialog
+      className="dialog"
+      ref={ref}
+      closedby="any"
+      aria-label="possible inputs"
+    >
       <ul className="production-list">
         {productions.map((prod) => (
           <li key={prod.inputId} className="production-item">
@@ -30,7 +35,7 @@ export default function ProductionList({
               alt={DecreaseButton.alt}
               src={DecreaseButton.src}
             />
-            <span className="normal-hover counter">
+            <span className="normal-hover counter" aria-label="counter value">
               {getCallback(prod.inputId)}
             </span>
             <ButtonIcon

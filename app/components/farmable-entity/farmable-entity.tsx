@@ -15,8 +15,7 @@ export default function FarmableEntity({ entity }: { entity: Farmable }) {
   }
 
   function increaseProductionCounter(id: string) {
-    let old = productionCounter.get(id);
-    old ??= 0;
+    const old = productionCounter.get(id) ?? 0;
     const copy = new Map(productionCounter);
     copy.set(id, old + 1);
     setProductionCounter(copy);
@@ -24,8 +23,7 @@ export default function FarmableEntity({ entity }: { entity: Farmable }) {
   }
 
   function decreaseProductionCounter(id: string) {
-    let old = productionCounter.get(id);
-    old ??= 0;
+    const old = productionCounter.get(id) ?? 0;
     const copy = new Map(productionCounter);
     copy.set(id, Math.max(0, old - 1));
     setProductionCounter(copy);
@@ -38,7 +36,13 @@ export default function FarmableEntity({ entity }: { entity: Farmable }) {
   }
 
   function openDialog() {
-    dialogRef.current?.show();
+    // workaround for testing since jsdom doesn't support dialog
+    // https://github.com/jsdom/jsdom/issues/3294
+    if (typeof dialogRef.current?.show === "function") {
+      dialogRef.current?.show();
+      return;
+    }
+    document.getElementsByTagName("dialog")[0].open = true;
   }
 
   const isMultiProducer = entity.production.length > 1;
@@ -70,13 +74,15 @@ export default function FarmableEntity({ entity }: { entity: Farmable }) {
           alt={IncreaseButton.alt}
           src={IncreaseButton.src}
         />
-        <ProductionList
-          productions={entity.production}
-          ref={dialogRef}
-          increaseCallback={increaseProductionCounter}
-          decreaseCallback={decreaseProductionCounter}
-          getCallback={getProductionCount}
-        />
+        {isMultiProducer && (
+          <ProductionList
+            productions={entity.production}
+            ref={dialogRef}
+            increaseCallback={increaseProductionCounter}
+            decreaseCallback={decreaseProductionCounter}
+            getCallback={getProductionCount}
+          />
+        )}
       </div>
     </div>
   );
