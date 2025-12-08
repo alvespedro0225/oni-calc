@@ -1,9 +1,12 @@
 import "../css/main.css";
 import { Outlet } from "react-router";
 import Navbar from "./navbar/navbar";
-import { Dlc, NonDupeFoodVariant, Orientation } from "~/common/enums";
+import { Orientation } from "~/common/enums";
 import Results from "./results";
+import { useGet } from "~/common/functions";
 import type { Critter } from "~/common/models/critter";
+import { useState } from "react";
+import { ResultManager } from "~/common/classes/result-manager";
 
 export default function Main() {
   const navOptions = [
@@ -15,82 +18,14 @@ export default function Main() {
     "recipes",
   ];
 
-  const critters: Critter[] = [
-    {
-      name: "Hatch",
-      id: "0",
-      imagePath: "hatch.png",
-      sheeding: null,
-      drops: [],
-      space: 12,
-      maxAge: 100,
-      baseReproduction: 60,
-      baseIncubation: 20,
-      dlc: Dlc.BASE,
-      production: [
-        {
-          inputId: "0",
-          inputValue: 0,
-          foodType: {
-            id: "0",
-            variant: NonDupeFoodVariant.MATERIAL,
-          },
-          outputId: "1",
-          outputValue: 0,
-        },
-        {
-          inputId: "2",
-          inputValue: 0,
-          foodType: {
-            id: "2",
-            variant: NonDupeFoodVariant.MATERIAL,
-          },
-          outputId: "2",
-          outputValue: 0,
-        },
-      ],
-    },
-    {
-      name: "Hatch",
-      id: "1",
-      imagePath: "hatch.png",
-      sheeding: null,
-      drops: [],
-      space: 12,
-      maxAge: 100,
-      baseReproduction: 60,
-      baseIncubation: 20,
-      dlc: Dlc.BASE,
-      production: [
-        {
-          inputId: "0",
-          inputValue: 0,
-          foodType: {
-            id: "0",
-            variant: NonDupeFoodVariant.MATERIAL,
-          },
-          outputId: "1",
-          outputValue: 0,
-        },
-        {
-          inputId: "2",
-          inputValue: 0,
-          foodType: {
-            id: "2",
-            variant: NonDupeFoodVariant.MATERIAL,
-          },
-          outputId: "2",
-          outputValue: 0,
-        },
-      ],
-    },
-  ];
-
+  const [res, setRes] = useState(new ResultManager());
+  const critters = useGet<Critter>("http://localhost:3000/critters").helper;
+  const result = { results: res, setResults: setRes };
   return (
     <main className="main-page">
       <Navbar orientation={Orientation.HORIZONTAL} options={[navOptions]} />
       <Results />
-      <Outlet context={critters} />
+      <Outlet context={{ critters, result }} />
     </main>
   );
 }

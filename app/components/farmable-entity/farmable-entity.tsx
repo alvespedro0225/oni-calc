@@ -42,6 +42,7 @@ export default function FarmableEntity({ entity }: { entity: Farmable }) {
       dialogRef.current?.show();
       return;
     }
+
     document.getElementsByTagName("dialog")[0].open = true;
   }
 

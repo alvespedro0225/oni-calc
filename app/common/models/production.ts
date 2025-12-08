@@ -1,9 +1,7 @@
-import type { NonDupeFood } from "./material";
+import type { Input } from "./input";
 
 export type Production = {
-  inputId: string;
-  inputValue: number;
-  foodType: NonDupeFood;
-  outputId: string;
-  outputValue: number;
+  id: string;
+  input: Input[];
+  output: Input[];
 };

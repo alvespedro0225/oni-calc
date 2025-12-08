@@ -7,24 +7,34 @@ import ProductionList from "~/components/farmable-entity/production-list";
 
 const productions: Production[] = [
   {
-    inputId: "0",
-    inputValue: 0,
-    foodType: {
-      id: "1",
-      variant: NonDupeFoodVariant.MATERIAL,
-    },
-    outputId: "3",
-    outputValue: 0,
+    id: "1",
+    input: [
+      {
+        id: "2",
+        value: 0,
+      },
+    ],
+    output: [
+      {
+        id: "3",
+        value: 0,
+      },
+    ],
   },
   {
-    inputId: "4",
-    inputValue: 0,
-    foodType: {
-      id: "5",
-      variant: NonDupeFoodVariant.MATERIAL,
-    },
-    outputId: "6",
-    outputValue: 0,
+    id: "4",
+    input: [
+      {
+        id: "5",
+        value: 0,
+      },
+    ],
+    output: [
+      {
+        id: "6",
+        value: 0,
+      },
+    ],
   },
 ];
 

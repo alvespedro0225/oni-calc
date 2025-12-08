@@ -1,10 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent, { type UserEvent } from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
-import { NonDupeFoodVariant } from "~/common/enums";
 import type { Farmable } from "~/common/models/farmable";
 import FarmableEntity from "~/components/farmable-entity/farmable-entity";
-import ProductionList from "~/components/farmable-entity/production-list";
 
 const entityMany: Farmable = {
   imagePath: "path0",
@@ -12,24 +10,34 @@ const entityMany: Farmable = {
   id: "0",
   production: [
     {
-      inputId: "1",
-      inputValue: 0,
-      foodType: {
-        id: "2",
-        variant: NonDupeFoodVariant.MATERIAL,
-      },
-      outputId: "3",
-      outputValue: 0,
+      id: "1",
+      input: [
+        {
+          id: "2",
+          value: 0,
+        },
+      ],
+      output: [
+        {
+          id: "3",
+          value: 0,
+        },
+      ],
     },
     {
-      inputId: "4",
-      inputValue: 0,
-      foodType: {
-        id: "5",
-        variant: NonDupeFoodVariant.MATERIAL,
-      },
-      outputId: "6",
-      outputValue: 0,
+      id: "4",
+      input: [
+        {
+          id: "5",
+          value: 0,
+        },
+      ],
+      output: [
+        {
+          id: "6",
+          value: 0,
+        },
+      ],
     },
   ],
 };
@@ -40,14 +48,19 @@ const entitySingle: Farmable = {
   id: "0",
   production: [
     {
-      inputId: "1",
-      inputValue: 0,
-      foodType: {
-        id: "2",
-        variant: NonDupeFoodVariant.MATERIAL,
-      },
-      outputId: "3",
-      outputValue: 0,
+      id: "1",
+      input: [
+        {
+          id: "2",
+          value: 0,
+        },
+      ],
+      output: [
+        {
+          id: "3",
+          value: 0,
+        },
+      ],
     },
   ],
 };

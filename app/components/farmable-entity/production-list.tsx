@@ -4,6 +4,8 @@ import "~/css/production-list.css";
 import "~/css/farmable-entity.css";
 import ButtonIcon from "../button-icon";
 import { DecreaseButton, IncreaseButton } from "~/common/constants";
+import { useOutletContext } from "react-router";
+import type { OutletContext } from "~/common/models/outlet-context";
 
 export default function ProductionList({
   productions,
@@ -18,7 +20,10 @@ export default function ProductionList({
   decreaseCallback: (prod: string) => void;
   getCallback: (prod: string) => number;
 }) {
+  function increaseResult(production: Production) {}
+
   const sameOutput = all(productions, (p) => p === productions[0]);
+
   return (
     <dialog
       className="dialog"
@@ -28,18 +33,18 @@ export default function ProductionList({
     >
       <ul className="production-list">
         {productions.map((prod) => (
-          <li key={prod.inputId} className="production-item">
-            {"input"} {!sameOutput && "--> output"}
+          <li key={prod.id} className="production-item">
+            {prod.input[0].id} {!sameOutput && `--> ${prod.output[0].id}`}
             <ButtonIcon
-              callback={() => decreaseCallback(prod.inputId)}
+              callback={() => decreaseCallback(prod.id)}
               alt={DecreaseButton.alt}
               src={DecreaseButton.src}
             />
             <span className="normal-hover counter" aria-label="counter value">
-              {getCallback(prod.inputId)}
+              {getCallback(prod.id)}
             </span>
             <ButtonIcon
-              callback={() => increaseCallback(prod.inputId)}
+              callback={() => increaseCallback(prod.id)}
               alt={IncreaseButton.alt}
               src={IncreaseButton.src}
             />
