@@ -18,17 +18,12 @@ export default function Main({ crittersArray }: { crittersArray: Critter[] }) {
   ];
 
   const critters = useHelper(crittersArray);
-  const [addMaterial, subMaterial, getValues] = useResults();
-  const result = {
-    addMaterial,
-    subMaterial,
-    getValues,
-  };
+  const result = useResults();
 
   return (
     <main className="main-page">
       <Navbar orientation={Orientation.HORIZONTAL} options={[navOptions]} />
-      <Results />
+      <Results result={result} />
       <Outlet context={{ critters, result }} />
     </main>
   );

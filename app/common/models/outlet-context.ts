@@ -1,12 +1,8 @@
-import type { Dispatch, SetStateAction } from "react";
-import type { ResultManager } from "./result-manager";
 import type { Helper } from "./helper";
 import type { Critter } from "./critter";
+import type { ResultHelper } from "./results";
 
 export type OutletContext = {
-  result: {
-    res: ResultManager;
-    setRes: Dispatch<SetStateAction<ResultManager>>;
-  };
+  result: ResultHelper;
   critters: Helper<Critter>;
 };

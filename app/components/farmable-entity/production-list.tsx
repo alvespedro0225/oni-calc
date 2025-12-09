@@ -1,11 +1,9 @@
-import { use, type Ref } from "react";
+import { type Ref } from "react";
 import type { Production } from "~/common/models/production";
 import "~/css/production-list.css";
 import "~/css/farmable-entity.css";
 import ButtonIcon from "../button-icon";
 import { DecreaseButton, IncreaseButton } from "~/common/constants";
-import { useOutletContext } from "react-router";
-import type { OutletContext } from "~/common/models/outlet-context";
 
 export default function ProductionList({
   productions,
@@ -16,8 +14,8 @@ export default function ProductionList({
 }: {
   productions: Production[];
   ref: Ref<HTMLDialogElement>;
-  increaseCallback: (prod: string) => void;
-  decreaseCallback: (prod: string) => void;
+  increaseCallback: (prod: Production) => void;
+  decreaseCallback: (prod: Production) => void;
   getCallback: (prod: string) => number;
 }) {
   const sameOutput = all(productions, (p) => p === productions[0]);
@@ -34,7 +32,7 @@ export default function ProductionList({
           <li key={prod.id} className="production-item">
             {prod.input[0].id} {!sameOutput && `--> ${prod.output[0].id}`}
             <ButtonIcon
-              callback={() => decreaseCallback(prod.id)}
+              callback={() => decreaseCallback(prod)}
               alt={DecreaseButton.alt}
               src={DecreaseButton.src}
             />
@@ -42,7 +40,7 @@ export default function ProductionList({
               {getCallback(prod.id)}
             </span>
             <ButtonIcon
-              callback={() => increaseCallback(prod.id)}
+              callback={() => increaseCallback(prod)}
               alt={IncreaseButton.alt}
               src={IncreaseButton.src}
             />

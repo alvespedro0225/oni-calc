@@ -1,6 +1,6 @@
 import type { Dlc } from "../enums";
 import type { Farmable } from "./farmable";
-import type { Material } from "./material";
+import type { Input } from "./input";
 import type { Production } from "./production";
 
 export interface Critter extends Farmable {
@@ -9,10 +9,11 @@ export interface Critter extends Farmable {
   imagePath: string;
   production: Production[];
   sheeding: string[] | null;
-  drops: Material[];
+  drops: Input[];
   space: number;
   maxAge: number;
   baseReproduction: number;
   baseIncubation: number;
   dlc: Dlc;
+  eggId: string;
 }

@@ -4,31 +4,44 @@ import type { Farmable } from "~/common/models/farmable";
 import ButtonIcon from "../button-icon";
 import { DecreaseButton, IncreaseButton } from "~/common/constants";
 import ProductionList from "./production-list";
+import type { ResultHelper } from "~/common/models/results";
+import type { Production } from "~/common/models/production";
 
-export default function FarmableEntity({ entity }: { entity: Farmable }) {
-  function increaseEntityCounter() {
+export default function FarmableEntity({
+  entity,
+  addCallback,
+  subCallback,
+}: {
+  entity: Farmable;
+  addCallback: (production: Production, id: string) => void;
+  subCallback: (production: Production, id: string) => void;
+}) {
+  function increaseEntityCounter(production: Production) {
     setEntityCounter((c) => c + 1);
+    addCallback(production, entity.id);
   }
 
-  function decreaseEntityCounter() {
-    setEntityCounter((c) => Math.max(0, c - 1));
+  function decreaseEntityCounter(production: Production) {
+    if (entityCounter === 0) return;
+    setEntityCounter((c) => c - 1);
+    subCallback(production, entity.id);
   }
 
-  function increaseProductionCounter(id: string) {
-    const old = productionCounter.get(id) ?? 0;
+  function increaseProductionCounter(production: Production) {
+    const old = productionCounter.get(production.id) ?? 0;
     const copy = new Map(productionCounter);
-    copy.set(id, old + 1);
+    copy.set(production.id, old + 1);
     setProductionCounter(copy);
-    increaseEntityCounter();
+    increaseEntityCounter(production);
   }
 
-  function decreaseProductionCounter(id: string) {
-    const old = productionCounter.get(id) ?? 0;
+  function decreaseProductionCounter(production: Production) {
+    const old = productionCounter.get(production.id) ?? 0;
     const copy = new Map(productionCounter);
-    copy.set(id, Math.max(0, old - 1));
+    copy.set(production.id, Math.max(0, old - 1));
     setProductionCounter(copy);
 
-    if (old > 0) decreaseEntityCounter();
+    if (old > 0) decreaseEntityCounter(production);
   }
 
   function getProductionCount(id: string) {
@@ -63,7 +76,7 @@ export default function FarmableEntity({ entity }: { entity: Farmable }) {
       {entity.name}
       <div className="counter-wrapper">
         <ButtonIcon
-          callback={decreaseCallback}
+          callback={() => decreaseCallback(entity.production[0])}
           alt={DecreaseButton.alt}
           src={DecreaseButton.src}
         />
@@ -71,7 +84,7 @@ export default function FarmableEntity({ entity }: { entity: Farmable }) {
           {entityCounter}
         </span>
         <ButtonIcon
-          callback={increaseCallback}
+          callback={() => increaseCallback(entity.production[0])}
           alt={IncreaseButton.alt}
           src={IncreaseButton.src}
         />

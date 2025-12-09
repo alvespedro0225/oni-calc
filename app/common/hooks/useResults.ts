@@ -1,27 +1,25 @@
 import { useState } from "react";
+import type { ResultHelper } from "../models/results";
 
-type commandFunction = (id: string, value: number) => void;
-type queryFunction = () => [string, number][];
-
-export function useResults(): [
-  commandFunction,
-  commandFunction,
-  queryFunction,
-] {
+export function useResults(): ResultHelper {
   const [result, setResult] = useState(new Map<string, number>());
 
   function addMaterial(id: string, value: number) {
-    const clone = { ...result };
-    const cur = clone.get(id) ?? 0;
-    clone.set(id, cur + value);
-    setResult(clone);
+    setResult((old) => {
+      const clone = new Map(old);
+      const cur = old.get(id) ?? 0;
+      clone.set(id, cur + value);
+      return clone;
+    });
   }
 
   function subMaterial(id: string, value: number) {
-    const clone = { ...result };
-    const cur = clone.get(id) ?? 0;
-    clone.set(id, cur - value);
-    setResult(clone);
+    setResult((old) => {
+      const clone = new Map(old);
+      const cur = old.get(id) ?? 0;
+      clone.set(id, cur - value);
+      return clone;
+    });
   }
 
   function getValues() {
@@ -34,5 +32,5 @@ export function useResults(): [
     return array;
   }
 
-  return [addMaterial, subMaterial, getValues];
+  return { addMaterial, subMaterial, getValues };
 }

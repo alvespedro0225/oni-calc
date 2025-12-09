@@ -1,7 +1,8 @@
 import { useState } from "react";
 import type { Entity } from "../models/entity";
+import type { Helper } from "../models/helper";
 
-export function useHelper<T extends Entity>(array: T[]) {
+export function useHelper<T extends Entity>(array: T[]): Helper<T> {
   const [map, _] = useState(arrayToMap(array));
 
   const helper = {
