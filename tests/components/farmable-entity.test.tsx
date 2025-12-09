@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent, { type UserEvent } from "@testing-library/user-event";
+import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 import type { Farmable } from "~/common/models/farmable";
 import FarmableEntity from "~/components/farmable-entity/farmable-entity";

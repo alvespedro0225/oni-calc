@@ -1,5 +1,6 @@
 import type { Route } from "./+types/home";
 import Main from "~/components/main";
+import { Loading } from "~/components/loading";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,10 +9,19 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Home() {
+export async function clientLoader({ params }: Route.ClientActionArgs) {
+  const res = await fetch("http://localhost:3000/critters");
+  return await res.json();
+}
+
+export function HydrateFallback() {
+  return <Loading />;
+}
+
+export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <>
-      <Main />
+      <Main crittersArray={loaderData} />
     </>
   );
 }

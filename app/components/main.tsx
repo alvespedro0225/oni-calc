@@ -3,12 +3,11 @@ import { Outlet } from "react-router";
 import Navbar from "./navbar/navbar";
 import { Orientation } from "~/common/enums";
 import Results from "./results";
-import { useGet } from "~/common/functions";
 import type { Critter } from "~/common/models/critter";
-import { useState } from "react";
-import { ResultManager } from "~/common/classes/result-manager";
+import { useHelper } from "~/common/hooks/useHelper";
+import { useResults } from "~/common/hooks/useResults";
 
-export default function Main() {
+export default function Main({ crittersArray }: { crittersArray: Critter[] }) {
   const navOptions = [
     "buildings",
     "critters",
@@ -18,9 +17,14 @@ export default function Main() {
     "recipes",
   ];
 
-  const [res, setRes] = useState(new ResultManager());
-  const critters = useGet<Critter>("http://localhost:3000/critters").helper;
-  const result = { results: res, setResults: setRes };
+  const critters = useHelper(crittersArray);
+  const [addMaterial, subMaterial, getValues] = useResults();
+  const result = {
+    addMaterial,
+    subMaterial,
+    getValues,
+  };
+
   return (
     <main className="main-page">
       <Navbar orientation={Orientation.HORIZONTAL} options={[navOptions]} />

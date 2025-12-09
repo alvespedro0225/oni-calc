@@ -1,4 +1,4 @@
-import type { Ref } from "react";
+import { use, type Ref } from "react";
 import type { Production } from "~/common/models/production";
 import "~/css/production-list.css";
 import "~/css/farmable-entity.css";
@@ -20,8 +20,6 @@ export default function ProductionList({
   decreaseCallback: (prod: string) => void;
   getCallback: (prod: string) => number;
 }) {
-  function increaseResult(production: Production) {}
-
   const sameOutput = all(productions, (p) => p === productions[0]);
 
   return (
