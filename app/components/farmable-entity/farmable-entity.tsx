@@ -4,7 +4,6 @@ import type { Farmable } from "~/common/models/farmable";
 import ButtonIcon from "../button-icon";
 import { DecreaseButton, IncreaseButton } from "~/common/constants";
 import ProductionList from "./production-list";
-import type { ResultHelper } from "~/common/models/results";
 import type { Production } from "~/common/models/production";
 
 export default function FarmableEntity({

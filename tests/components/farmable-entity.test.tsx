@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import userEvent, { type UserEvent } from "@testing-library/user-event";
-import { createRoutesStub } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import type { Farmable } from "~/common/models/farmable";
 import type { Production } from "~/common/models/production";
